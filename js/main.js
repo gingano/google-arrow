@@ -4,7 +4,7 @@ let basePosition = svg.getBoundingClientRect().height * 0.4
 let arrowBreakpoints = `M0 ${basePosition} L${headPosition} ${basePosition} L${headPosition} 0 L${svg.getBoundingClientRect().width} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L0 ${svg.getBoundingClientRect().height - basePosition}`
 let drawArrow = () => {
   svg.innerHTML = `
-    <path id="arrow-figure" d="${arrowBreakpoints}"/>
+    <path fill="#EEEEEE" stroke="#000" id="arrow-figure" d="${arrowBreakpoints}"/>
     <circle id="arrow-head-point" cx="${headPosition}" cy="3" r="3" fill="red" />
     <circle id="arrow-base-point" cx="2" cy="${svg.getBoundingClientRect().height * 0.4 + 1.5}" r="3" fill="red"/>
     <rect id="top-left" x="0" y="0" width="5" height="5" fill="blue" stroke-width="1"/>
