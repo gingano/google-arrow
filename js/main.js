@@ -20,7 +20,6 @@ let drawArrow = () => {
     <rect id="bottom-right" x="${svgWidth - rectSize}" y="${svgHeight - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
     <rect id="bottom-left" x="0" y="${svgHeight - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
     
-    <line class="line" x1="${svgWidth / 2}" y1="-${rectSize / 2}" x2="${svgWidth / 2}" y2="-10" stroke="blue" stroke-width="1.5"/>
     <line class="line" x1="${rectSize * 2}" y1="${rectSize / 2}" x2="${svgWidth / 2 - rectSize * 2}" y2="${rectSize / 2}" stroke="blue" stroke-width="1.5"/>
     <line class="line" x1="${svgWidth / 2 + rectSize * 2}" y1="${rectSize / 2}" x2="${svgWidth - rectSize * 2}" y2="${rectSize / 2}" stroke="blue" stroke-width="1.5"/>
     <line class="line" x1="${svgWidth - rectSize / 2}" y1="${rectSize * 2}" x2="${svgWidth - rectSize / 2}" y2="${svgHeight / 2 - rectSize * 2}" stroke="blue" stroke-width="1.5"/>
@@ -29,6 +28,7 @@ let drawArrow = () => {
     <line class="line" x1="${svgWidth / 2 - rectSize * 2}" y1="${svgHeight - rectSize / 2}" x2="${rectSize * 2}" y2="${svgHeight - rectSize / 2}" stroke="blue" stroke-width="1.5"/>
     <line class="line" x1="${rectSize / 2}" y1="${svgHeight - rectSize * 2}" x2="${rectSize / 2}" y2="${svgHeight / 2 + rectSize * 2}" stroke="blue" stroke-width="1.5"/>
     <line class="line" x1="${rectSize / 2}" y1="${svgHeight / 2 - rectSize * 2}" x2="${rectSize / 2}" y2="${rectSize * 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${svgWidth / 2}" y1="-${rectSize / 2}" x2="${svgWidth / 2}" y2="-10" stroke="blue" stroke-width="1.5"/>
     `
 }
 drawArrow()
@@ -78,6 +78,9 @@ let borderResize = () => {
   lines[6].setAttribute("y2", svgHeight / 2 + rectSize * 2)
 
   lines[7].setAttribute("y1", svgHeight / 2 - rectSize * 2)
+
+  lines[8].setAttribute("x1", svgWidth / 2)
+  lines[8].setAttribute("x2", svgWidth / 2)
 
   topRect.setAttribute("x", svgWidth / 2 - rectSize / 2)
 
