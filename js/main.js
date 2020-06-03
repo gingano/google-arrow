@@ -4,6 +4,8 @@ let svgHeight = svg.getBoundingClientRect().height - 20
 let headPosition = 101.5
 let basePosition = svgHeight * 0.4
 let rectSize = 5
+
+//SVG initialization
 let drawArrow = () => {
   svg.innerHTML = `
     <path fill="#EEEEEE" stroke="#000" id="arrow-figure" d="M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}"/>
@@ -33,6 +35,7 @@ let drawArrow = () => {
 }
 drawArrow()
 
+//border lines and points initialization
 let lines = document.querySelectorAll('.line')
 let topRect = document.getElementById('top')
 let rightRect = document.getElementById('right')
@@ -45,6 +48,7 @@ let bottomLeftRect = document.getElementById('bottom-left')
 
 let rotatePoint = document.getElementById('rotate-point')
 
+//function for updating border sizes
 let borderResize = () => {
   svgWidth = svg.getBoundingClientRect().width
   svgHeight = svg.getBoundingClientRect().height - 20
@@ -100,10 +104,14 @@ let borderResize = () => {
   bottomLeftRect.setAttribute("y", svgHeight - rectSize)
 }
 
+//points for editing initialization
 let arrowHeadPoint = document.getElementById('arrow-head-point')
 let arrowBasePoint = document.getElementById('arrow-base-point')
+
+//arrow figure initialization
 let arrowFigure = document.getElementById('arrow-figure')
 
+//rotate function
 rotatePoint.addEventListener('mousedown', (event) => {
   let initialLeft = rotatePoint.getBoundingClientRect().left
   let initialRotate = 0
@@ -122,6 +130,7 @@ rotatePoint.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing arrow head
 arrowHeadPoint.addEventListener('mousedown', (event) => {
   let point = event.target
   let onMouseMove = (event) => {
@@ -141,6 +150,7 @@ arrowHeadPoint.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing arrow base
 arrowBasePoint.addEventListener('mousedown', (event) => {
   let point = event.target
   let onMouseMove = (event) => {
@@ -160,6 +170,7 @@ arrowBasePoint.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for figure movement
 arrowFigure.addEventListener('mousedown', (event) => {
   let shiftX = event.clientX - svg.getBoundingClientRect().left;
   let shiftY = event.clientY - svg.getBoundingClientRect().top;
@@ -177,6 +188,7 @@ arrowFigure.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the top center point
 topRect.addEventListener('mousedown', (event) => {
   let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
@@ -199,6 +211,7 @@ topRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the right center point
 rightRect.addEventListener('mousedown', (event) => {
   let onMouseMove = (event) => {
     if (event.clientX - svg.getBoundingClientRect().left > 100) {
@@ -222,6 +235,7 @@ rightRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the bottom center point
 bottomRect.addEventListener('mousedown', (event) => {
   let onMouseMove = (event) => {
     if (event.clientY - svg.getBoundingClientRect().top > 100) {
@@ -241,6 +255,7 @@ bottomRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the left center point
 leftRect.addEventListener('mousedown', (event) => {
   let initialWidth = svgWidth
   let initialLeft = svg.getBoundingClientRect().left
@@ -267,6 +282,7 @@ leftRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the top left point
 topLeftRect.addEventListener('mousedown', (event) => {
   let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
@@ -297,6 +313,7 @@ topLeftRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the top right point
 topRightRect.addEventListener('mousedown', (event) => {
   let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
@@ -324,6 +341,7 @@ topRightRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the bottom right point
 bottomRightRect.addEventListener('mousedown', (event) => {
   let onMouseMove = (event) => {
     if (event.clientY - svg.getBoundingClientRect().top > 100 && event.clientX - svg.getBoundingClientRect().left > 100) {
@@ -348,6 +366,7 @@ bottomRightRect.addEventListener('mousedown', (event) => {
   })
 })
 
+//function for resizing using the bottom left point
 bottomLeftRect.addEventListener('mousedown', (event) => {
   let initialWidth = svgWidth
   let initialLeft = svg.getBoundingClientRect().left
