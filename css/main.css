@@ -289,6 +289,6 @@ textarea {
   cursor: crosshair;
 }
 
-.line {
+.line, #arrow-figure {
   cursor: move;
 }

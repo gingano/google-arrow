@@ -127,6 +127,23 @@ arrowBasePoint.addEventListener('mousedown', (event) => {
   })
 })
 
+arrowFigure.addEventListener('mousedown', (event) => {
+  let shiftX = event.clientX - svg.getBoundingClientRect().left;
+  let shiftY = event.clientY - svg.getBoundingClientRect().top;
+
+  let onMouseMove = (event) => {
+    svg.style.left = event.pageX - shiftX + 'px'
+    svg.style.top = event.pageY - shiftY + 'px'
+  }
+
+  document.addEventListener('mousemove', onMouseMove)
+
+  document.addEventListener('mouseup', (event) => {
+    document.removeEventListener('mousemove', onMouseMove)
+    document.onmouseup = null
+  })
+})
+
 lines.forEach(line => {
   line.addEventListener('mousedown', (event) => {
     let shiftX = event.clientX - svg.getBoundingClientRect().left;
