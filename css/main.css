@@ -264,9 +264,9 @@ textarea {
 }
 
 #arrow {
+  position: absolute;
   width: 300px;
   height: 300px;
-  margin: 50px;
 }
 
 #top-left, #bottom-right {
@@ -277,6 +277,18 @@ textarea {
   cursor: nesw-resize;
 }
 
+#top, #bottom {
+  cursor: ns-resize;
+}
+
+#left, #right {
+  cursor: ew-resize;
+}
+
 #arrow-head-point, #arrow-base-point {
   cursor: crosshair;
+}
+
+.line {
+  cursor: move;
 }
