@@ -1,30 +1,34 @@
 let svg = document.getElementById('arrow')
+let svgWidth = svg.getBoundingClientRect().width
+let svgHeight = svg.getBoundingClientRect().height - 20
 let headPosition = 101.5
-let basePosition = svg.getBoundingClientRect().height * 0.4
+let basePosition = svgHeight * 0.4
 let rectSize = 5
 let drawArrow = () => {
   svg.innerHTML = `
-    <path fill="#EEEEEE" stroke="#000" id="arrow-figure" d="M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}"/>
+    <path fill="#EEEEEE" stroke="#000" id="arrow-figure" d="M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}"/>
+    <circle id="rotate-point" cx="${svgWidth / 2}" cy="-15" r="3" fill="blue" />
     <circle id="arrow-head-point" cx="${headPosition}" cy="${rectSize * 2}" r="3" fill="red" />
-    <circle id="arrow-base-point" cx="${rectSize * 2}" cy="${svg.getBoundingClientRect().height * 0.4 + 1.5}" r="3" fill="red"/>
+    <circle id="arrow-base-point" cx="${rectSize * 2}" cy="${svgHeight * 0.4 + 1.5}" r="3" fill="red"/>
     
-    <rect id="top" x="${svg.getBoundingClientRect().width / 2 - rectSize / 2}" y="0" width="5" height="5" fill="blue" stroke-width="1"/>
-    <rect id="right" x="${svg.getBoundingClientRect().width - rectSize}" y="${svg.getBoundingClientRect().height / 2 - rectSize/2}" width="5" height="5" fill="blue" stroke-width="1"/>
-    <rect id="bottom" x="${svg.getBoundingClientRect().width / 2 - rectSize/2}" y="${svg.getBoundingClientRect().height - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
-    <rect id="left" x="0" y="${svg.getBoundingClientRect().height / 2 - rectSize/2}" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="top" x="${svgWidth / 2 - rectSize / 2}" y="0" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="right" x="${svgWidth - rectSize}" y="${svgHeight / 2 - rectSize/2}" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="bottom" x="${svgWidth / 2 - rectSize/2}" y="${svgHeight - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="left" x="0" y="${svgHeight / 2 - rectSize/2}" width="5" height="5" fill="blue" stroke-width="1"/>
     <rect id="top-left" x="0" y="0" width="5" height="5" fill="blue" stroke-width="1"/>
-    <rect id="top-right" x="${svg.getBoundingClientRect().width - rectSize}" y="0" width="5" height="5" fill="blue" stroke-width="1"/>
-    <rect id="bottom-right" x="${svg.getBoundingClientRect().width - rectSize}" y="${svg.getBoundingClientRect().height - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
-    <rect id="bottom-left" x="0" y="${svg.getBoundingClientRect().height - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="top-right" x="${svgWidth - rectSize}" y="0" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="bottom-right" x="${svgWidth - rectSize}" y="${svgHeight - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
+    <rect id="bottom-left" x="0" y="${svgHeight - rectSize}" width="5" height="5" fill="blue" stroke-width="1"/>
     
-    <line class="line" x1="${rectSize * 2}" y1="${rectSize / 2}" x2="${svg.getBoundingClientRect().width / 2 - rectSize * 2}" y2="${rectSize / 2}" stroke="blue" stroke-width="1.5"/>
-    <line class="line" x1="${svg.getBoundingClientRect().width / 2 + rectSize * 2}" y1="${rectSize / 2}" x2="${svg.getBoundingClientRect().width - rectSize * 2}" y2="${rectSize / 2}" stroke="blue" stroke-width="1.5"/>
-    <line class="line" x1="${svg.getBoundingClientRect().width - rectSize / 2}" y1="${rectSize * 2}" x2="${svg.getBoundingClientRect().width - rectSize / 2}" y2="${svg.getBoundingClientRect().height / 2 - rectSize * 2}" stroke="blue" stroke-width="1.5"/>
-    <line class="line" x1="${svg.getBoundingClientRect().width - rectSize / 2}" y1="${svg.getBoundingClientRect().height / 2 + rectSize * 2}" x2="${svg.getBoundingClientRect().width - rectSize / 2}" y2="${svg.getBoundingClientRect().height - rectSize * 2}" stroke="blue" stroke-width="1.5"/>    
-    <line class="line" x1="${svg.getBoundingClientRect().width - rectSize * 2}" y1="${svg.getBoundingClientRect().height - rectSize / 2}" x2="${svg.getBoundingClientRect().width / 2 + rectSize * 2}" y2="${svg.getBoundingClientRect().height - rectSize / 2}" stroke="blue" stroke-width="1.5"/>
-    <line class="line" x1="${svg.getBoundingClientRect().width / 2 - rectSize * 2}" y1="${svg.getBoundingClientRect().height - rectSize / 2}" x2="${rectSize * 2}" y2="${svg.getBoundingClientRect().height - rectSize / 2}" stroke="blue" stroke-width="1.5"/>
-    <line class="line" x1="${rectSize / 2}" y1="${svg.getBoundingClientRect().height - rectSize * 2}" x2="${rectSize / 2}" y2="${svg.getBoundingClientRect().height / 2 + rectSize * 2}" stroke="blue" stroke-width="1.5"/>
-    <line class="line" x1="${rectSize / 2}" y1="${svg.getBoundingClientRect().height / 2 - rectSize * 2}" x2="${rectSize / 2}" y2="${rectSize * 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${svgWidth / 2}" y1="-${rectSize / 2}" x2="${svgWidth / 2}" y2="-10" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${rectSize * 2}" y1="${rectSize / 2}" x2="${svgWidth / 2 - rectSize * 2}" y2="${rectSize / 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${svgWidth / 2 + rectSize * 2}" y1="${rectSize / 2}" x2="${svgWidth - rectSize * 2}" y2="${rectSize / 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${svgWidth - rectSize / 2}" y1="${rectSize * 2}" x2="${svgWidth - rectSize / 2}" y2="${svgHeight / 2 - rectSize * 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${svgWidth - rectSize / 2}" y1="${svgHeight / 2 + rectSize * 2}" x2="${svgWidth - rectSize / 2}" y2="${svgHeight - rectSize * 2}" stroke="blue" stroke-width="1.5"/>    
+    <line class="line" x1="${svgWidth - rectSize * 2}" y1="${svgHeight - rectSize / 2}" x2="${svgWidth / 2 + rectSize * 2}" y2="${svgHeight - rectSize / 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${svgWidth / 2 - rectSize * 2}" y1="${svgHeight - rectSize / 2}" x2="${rectSize * 2}" y2="${svgHeight - rectSize / 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${rectSize / 2}" y1="${svgHeight - rectSize * 2}" x2="${rectSize / 2}" y2="${svgHeight / 2 + rectSize * 2}" stroke="blue" stroke-width="1.5"/>
+    <line class="line" x1="${rectSize / 2}" y1="${svgHeight / 2 - rectSize * 2}" x2="${rectSize / 2}" y2="${rectSize * 2}" stroke="blue" stroke-width="1.5"/>
     `
 }
 drawArrow()
@@ -39,63 +43,89 @@ let topRightRect = document.getElementById('top-right')
 let bottomRightRect = document.getElementById('bottom-right')
 let bottomLeftRect = document.getElementById('bottom-left')
 
+let rotatePoint = document.getElementById('rotate-point')
+
 let borderResize = () => {
-  lines[0].setAttribute("x2", svg.getBoundingClientRect().width / 2 - rectSize * 2)
+  svgWidth = svg.getBoundingClientRect().width
+  svgHeight = svg.getBoundingClientRect().height - 20
 
-  lines[1].setAttribute("x1", svg.getBoundingClientRect().width / 2 + rectSize * 2)
-  lines[1].setAttribute("x2", svg.getBoundingClientRect().width - rectSize * 2)
+  rotatePoint.setAttribute("cx", svgWidth / 2)
 
-  lines[2].setAttribute("x1", svg.getBoundingClientRect().width - rectSize / 2)
-  lines[2].setAttribute("x2", svg.getBoundingClientRect().width - rectSize / 2)
-  lines[2].setAttribute("y2", svg.getBoundingClientRect().height / 2 - rectSize * 2)
+  lines[0].setAttribute("x2", svgWidth / 2 - rectSize * 2)
 
-  lines[3].setAttribute("x1", svg.getBoundingClientRect().width - rectSize / 2)
-  lines[3].setAttribute("y1", svg.getBoundingClientRect().height / 2 + rectSize * 2)
-  lines[3].setAttribute("x2", svg.getBoundingClientRect().width - rectSize / 2)
-  lines[3].setAttribute("y2", svg.getBoundingClientRect().height - rectSize * 2)
+  lines[1].setAttribute("x1", svgWidth / 2 + rectSize * 2)
+  lines[1].setAttribute("x2", svgWidth - rectSize * 2)
 
-  lines[4].setAttribute("x1", svg.getBoundingClientRect().width - rectSize * 2)
-  lines[4].setAttribute("y1", svg.getBoundingClientRect().height - rectSize / 2)
-  lines[4].setAttribute("x2", svg.getBoundingClientRect().width / 2 + rectSize * 2)
-  lines[4].setAttribute("y2", svg.getBoundingClientRect().height - rectSize / 2)
+  lines[2].setAttribute("x1", svgWidth - rectSize / 2)
+  lines[2].setAttribute("x2", svgWidth - rectSize / 2)
+  lines[2].setAttribute("y2", svgHeight / 2 - rectSize * 2)
 
-  lines[5].setAttribute("x1", svg.getBoundingClientRect().width / 2 - rectSize * 2)
-  lines[5].setAttribute("y1", svg.getBoundingClientRect().height - rectSize / 2)
-  lines[5].setAttribute("y2", svg.getBoundingClientRect().height - rectSize / 2)
+  lines[3].setAttribute("x1", svgWidth - rectSize / 2)
+  lines[3].setAttribute("y1", svgHeight / 2 + rectSize * 2)
+  lines[3].setAttribute("x2", svgWidth - rectSize / 2)
+  lines[3].setAttribute("y2", svgHeight - rectSize * 2)
 
-  lines[6].setAttribute("y1", svg.getBoundingClientRect().height - rectSize * 2)
-  lines[6].setAttribute("y2", svg.getBoundingClientRect().height / 2 + rectSize * 2)
+  lines[4].setAttribute("x1", svgWidth - rectSize * 2)
+  lines[4].setAttribute("y1", svgHeight - rectSize / 2)
+  lines[4].setAttribute("x2", svgWidth / 2 + rectSize * 2)
+  lines[4].setAttribute("y2", svgHeight - rectSize / 2)
 
-  lines[7].setAttribute("y1", svg.getBoundingClientRect().height / 2 - rectSize * 2)
+  lines[5].setAttribute("x1", svgWidth / 2 - rectSize * 2)
+  lines[5].setAttribute("y1", svgHeight - rectSize / 2)
+  lines[5].setAttribute("y2", svgHeight - rectSize / 2)
 
-  topRect.setAttribute("x", svg.getBoundingClientRect().width / 2 - rectSize / 2)
+  lines[6].setAttribute("y1", svgHeight - rectSize * 2)
+  lines[6].setAttribute("y2", svgHeight / 2 + rectSize * 2)
 
-  rightRect.setAttribute("x", svg.getBoundingClientRect().width - rectSize)
-  rightRect.setAttribute("y", svg.getBoundingClientRect().height / 2 - rectSize / 2)
+  lines[7].setAttribute("y1", svgHeight / 2 - rectSize * 2)
 
-  bottomRect.setAttribute("x", svg.getBoundingClientRect().width / 2 - rectSize / 2)
-  bottomRect.setAttribute("y", svg.getBoundingClientRect().height - rectSize)
+  topRect.setAttribute("x", svgWidth / 2 - rectSize / 2)
 
-  leftRect.setAttribute("y", svg.getBoundingClientRect().height / 2 - rectSize / 2)
+  rightRect.setAttribute("x", svgWidth - rectSize)
+  rightRect.setAttribute("y", svgHeight / 2 - rectSize / 2)
 
-  topRightRect.setAttribute("x", svg.getBoundingClientRect().width - rectSize)
+  bottomRect.setAttribute("x", svgWidth / 2 - rectSize / 2)
+  bottomRect.setAttribute("y", svgHeight - rectSize)
 
-  bottomRightRect.setAttribute("x", svg.getBoundingClientRect().width - rectSize)
-  bottomRightRect.setAttribute("y", svg.getBoundingClientRect().height - rectSize)
+  leftRect.setAttribute("y", svgHeight / 2 - rectSize / 2)
 
-  bottomLeftRect.setAttribute("y", svg.getBoundingClientRect().height - rectSize)
+  topRightRect.setAttribute("x", svgWidth - rectSize)
+
+  bottomRightRect.setAttribute("x", svgWidth - rectSize)
+  bottomRightRect.setAttribute("y", svgHeight - rectSize)
+
+  bottomLeftRect.setAttribute("y", svgHeight - rectSize)
 }
+
 let arrowHeadPoint = document.getElementById('arrow-head-point')
 let arrowBasePoint = document.getElementById('arrow-base-point')
 let arrowFigure = document.getElementById('arrow-figure')
+
+rotatePoint.addEventListener('mousedown', (event) => {
+  let initialLeft = rotatePoint.getBoundingClientRect().left
+  let initialRotate = 0
+  if (svg.style.transform.split('(')[1]) {
+    initialRotate = Number(svg.style.transform.split('(')[1].split('deg')[0])
+  }
+  let onMouseMove = (event) => {
+    svg.style.transform = `rotate(${(event.clientX - initialLeft) * 0.4 + initialRotate}deg)`
+  }
+
+  document.addEventListener('mousemove', onMouseMove)
+
+  document.addEventListener('mouseup', (event) => {
+    document.removeEventListener('mousemove', onMouseMove)
+    document.onmouseup = null
+  })
+})
 
 arrowHeadPoint.addEventListener('mousedown', (event) => {
   let point = event.target
   let onMouseMove = (event) => {
     if (event.clientX - svg.getBoundingClientRect().left + 1.5 > 15 &&
-      event.clientX - svg.getBoundingClientRect().left + 1.5 < svg.getBoundingClientRect().width - 15) {
+      event.clientX - svg.getBoundingClientRect().left + 1.5 < svgWidth - 15) {
       headPosition = event.clientX - svg.getBoundingClientRect().left + 1.5
-      arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+      arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
       point.setAttribute("cx", headPosition)
     }
   }
@@ -111,11 +141,11 @@ arrowHeadPoint.addEventListener('mousedown', (event) => {
 arrowBasePoint.addEventListener('mousedown', (event) => {
   let point = event.target
   let onMouseMove = (event) => {
-    if (event.clientY - svg.getBoundingClientRect().top + 1.5 < svg.getBoundingClientRect().height / 2 - rectSize * 2 &&
+    if (event.clientY - svg.getBoundingClientRect().top + 1.5 < svgHeight / 2 - rectSize * 2 &&
       event.clientY - svg.getBoundingClientRect().top + 1.5 > rectSize * 2) {
       basePosition = event.clientY - svg.getBoundingClientRect().top + 1.5
       point.setAttribute("cy", basePosition)
-      arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+      arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     }
   }
 
@@ -164,14 +194,14 @@ lines.forEach(line => {
 })
 
 topRect.addEventListener('mousedown', (event) => {
-  let initialHeight = svg.getBoundingClientRect().height
+  let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
   let onMouseMove = (event) => {
     svg.style.height = (initialHeight + initialTop - event.clientY) + 'px'
     svg.style.top = (event.clientY) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -186,9 +216,9 @@ topRect.addEventListener('mousedown', (event) => {
 rightRect.addEventListener('mousedown', (event) => {
   let onMouseMove = (event) => {
     svg.style.width = (event.clientX - svg.getBoundingClientRect().left) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -203,9 +233,9 @@ rightRect.addEventListener('mousedown', (event) => {
 bottomRect.addEventListener('mousedown', (event) => {
   let onMouseMove = (event) => {
     svg.style.height = (event.clientY - svg.getBoundingClientRect().top) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -218,14 +248,14 @@ bottomRect.addEventListener('mousedown', (event) => {
 })
 
 leftRect.addEventListener('mousedown', (event) => {
-  let initialWidth = svg.getBoundingClientRect().width
+  let initialWidth = svgWidth
   let initialLeft = svg.getBoundingClientRect().left
   let onMouseMove = (event) => {
     svg.style.width = (initialWidth + initialLeft - event.clientX) + 'px'
     svg.style.left = (event.clientX) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -238,18 +268,18 @@ leftRect.addEventListener('mousedown', (event) => {
 })
 
 topLeftRect.addEventListener('mousedown', (event) => {
-  let initialHeight = svg.getBoundingClientRect().height
+  let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
-  let initialWidth = svg.getBoundingClientRect().width
+  let initialWidth = svgWidth
   let initialLeft = svg.getBoundingClientRect().left
   let onMouseMove = (event) => {
     svg.style.height = (initialHeight + initialTop - event.clientY) + 'px'
     svg.style.top = (event.clientY) + 'px'
     svg.style.width = (initialWidth + initialLeft - event.clientX) + 'px'
     svg.style.left = (event.clientX) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -262,15 +292,15 @@ topLeftRect.addEventListener('mousedown', (event) => {
 })
 
 topRightRect.addEventListener('mousedown', (event) => {
-  let initialHeight = svg.getBoundingClientRect().height
+  let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
   let onMouseMove = (event) => {
     svg.style.height = (initialHeight + initialTop - event.clientY) + 'px'
     svg.style.top = (event.clientY) + 'px'
     svg.style.width = (event.clientX - svg.getBoundingClientRect().left) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -286,9 +316,9 @@ bottomRightRect.addEventListener('mousedown', (event) => {
   let onMouseMove = (event) => {
     svg.style.width = (event.clientX - svg.getBoundingClientRect().left) + 'px'
     svg.style.height = (event.clientY - svg.getBoundingClientRect().top) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 
@@ -301,15 +331,15 @@ bottomRightRect.addEventListener('mousedown', (event) => {
 })
 
 bottomLeftRect.addEventListener('mousedown', (event) => {
-  let initialWidth = svg.getBoundingClientRect().width
+  let initialWidth = svgWidth
   let initialLeft = svg.getBoundingClientRect().left
   let onMouseMove = (event) => {
     svg.style.width = (initialWidth + initialLeft - event.clientX) + 'px'
     svg.style.left = (event.clientX) + 'px'
     svg.style.height = (event.clientY - svg.getBoundingClientRect().top) + 'px'
-    basePosition = svg.getBoundingClientRect().height * 0.4
+    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svg.getBoundingClientRect().width - rectSize * 2} ${svg.getBoundingClientRect().height / 2} L${headPosition} ${svg.getBoundingClientRect().height - rectSize * 2} L${headPosition} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${svg.getBoundingClientRect().height - basePosition} L${rectSize * 2} ${basePosition}`)
+    arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     borderResize()
   }
 

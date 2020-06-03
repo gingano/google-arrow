@@ -267,6 +267,8 @@ textarea {
   position: absolute;
   width: 300px;
   height: 300px;
+  padding-top: 20px;
+  overflow: visible;
 }
 
 #top-left, #bottom-right {
@@ -285,7 +287,7 @@ textarea {
   cursor: ew-resize;
 }
 
-#arrow-head-point, #arrow-base-point {
+#arrow-head-point, #arrow-base-point, #rotate-point {
   cursor: crosshair;
 }
 
