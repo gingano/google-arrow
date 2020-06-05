@@ -137,8 +137,8 @@ rotatePoint.addEventListener('mousedown', (event) => {
 arrowHeadPoint.addEventListener('mousedown', (event) => {
   let point = event.target
   let onMouseMove = (event) => {
-    if (event.clientX - svg.getBoundingClientRect().left + 1.5 > 15 &&
-      event.clientX - svg.getBoundingClientRect().left + 1.5 < svgWidth - 15) {
+    if (event.clientX - svg.getBoundingClientRect().left + 1.5 > 30 &&
+      event.clientX - svg.getBoundingClientRect().left + 1.5 < svgWidth - 30) {
       headPosition = event.clientX - svg.getBoundingClientRect().left + 1.5
       arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
       point.setAttribute("cx", headPosition)
@@ -155,11 +155,12 @@ arrowHeadPoint.addEventListener('mousedown', (event) => {
 
 //function for resizing arrow base
 arrowBasePoint.addEventListener('mousedown', (event) => {
+  let initialHeight = svgHeight
   let point = event.target
   let onMouseMove = (event) => {
-    if (event.clientY - svg.getBoundingClientRect().top + 1.5 < svgHeight / 2 - rectSize * 2 &&
-      event.clientY - svg.getBoundingClientRect().top + 1.5 > rectSize * 2) {
-      basePosition = event.clientY - svg.getBoundingClientRect().top + 1.5
+    if (event.clientY - svg.getBoundingClientRect().top + 1.5 < svgHeight / 2 - rectSize * 2 + rotatePointDeviation &&
+      event.clientY - svg.getBoundingClientRect().top + 1.5 > rectSize * 3 + rotatePointDeviation) {
+      basePosition = event.clientY - svg.getBoundingClientRect().top - rectSize * 2 - rotatePointDeviation / 2
       point.setAttribute("cy", basePosition)
       arrowFigure.setAttribute("d", `M${rectSize * 2} ${basePosition} L${headPosition} ${basePosition} L${headPosition} ${rectSize * 2} L${svgWidth - rectSize * 2} ${svgHeight / 2} L${headPosition} ${svgHeight - rectSize * 2} L${headPosition} ${svgHeight - basePosition} L${rectSize * 2} ${svgHeight - basePosition} L${rectSize * 2} ${basePosition}`)
     }
@@ -193,6 +194,7 @@ arrowFigure.addEventListener('mousedown', (event) => {
 
 //function for resizing using the top center point
 topRect.addEventListener('mousedown', (event) => {
+  let initialBasePosition = basePosition
   let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
   let onMouseMove = (event) => {
@@ -200,7 +202,7 @@ topRect.addEventListener('mousedown', (event) => {
       document.documentElement.style.cursor = "ns-resize"
       svg.style.height = (initialHeight + initialTop - event.clientY + rotatePointDeviation) + 'px'
       svg.style.top = (event.clientY - rotatePointDeviation) + 'px'
-      basePosition = svgHeight * 0.4
+      basePosition = (initialHeight + initialTop - event.clientY + rotatePointDeviation) / (initialHeight / initialBasePosition)
       arrowBasePoint.setAttribute("cy", basePosition)
       figureResize()
     }
@@ -221,10 +223,9 @@ rightRect.addEventListener('mousedown', (event) => {
     if (event.clientX - svg.getBoundingClientRect().left + rectSize / 2 > 100) {
       document.documentElement.style.cursor = "ew-resize"
       svg.style.width = (event.clientX - svg.getBoundingClientRect().left + rectSize / 2) + 'px'
-      basePosition = svgHeight * 0.4
       arrowBasePoint.setAttribute("cy", basePosition)
-      if (svg.getBoundingClientRect().width - 15 <= headPosition) {
-        headPosition = svg.getBoundingClientRect().width - 15
+      if (svg.getBoundingClientRect().width - 30 <= headPosition) {
+        headPosition = svg.getBoundingClientRect().width - 30
       }
       arrowHeadPoint.setAttribute("cx", headPosition)
       figureResize()
@@ -242,11 +243,13 @@ rightRect.addEventListener('mousedown', (event) => {
 
 //function for resizing using the bottom center point
 bottomRect.addEventListener('mousedown', (event) => {
+  let initialBasePosition = basePosition
+  let initialHeight = svgHeight
   let onMouseMove = (event) => {
     if (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation > 100) {
       document.documentElement.style.cursor = "ns-resize"
       svg.style.height = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) + 'px'
-      basePosition = svgHeight * 0.4
+      basePosition = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) / (initialHeight / initialBasePosition)
       arrowBasePoint.setAttribute("cy", basePosition)
       figureResize()
     }
@@ -270,10 +273,9 @@ leftRect.addEventListener('mousedown', (event) => {
       document.documentElement.style.cursor = "ew-resize"
       svg.style.width = (initialWidth + initialLeft - event.clientX) + 'px'
       svg.style.left = (event.clientX - rectSize / 2) + 'px'
-      basePosition = svgHeight * 0.4
       arrowBasePoint.setAttribute("cy", basePosition)
-      if (svg.getBoundingClientRect().width - 15 <= headPosition) {
-        headPosition = svg.getBoundingClientRect().width - 15
+      if (svg.getBoundingClientRect().width - 30 <= headPosition) {
+        headPosition = svg.getBoundingClientRect().width - 30
       }
       arrowHeadPoint.setAttribute("cx", headPosition)
       figureResize()
@@ -291,6 +293,7 @@ leftRect.addEventListener('mousedown', (event) => {
 
 //function for resizing using the top left point
 topLeftRect.addEventListener('mousedown', (event) => {
+  let initialBasePosition = basePosition
   let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
   let initialWidth = svgWidth
@@ -300,15 +303,15 @@ topLeftRect.addEventListener('mousedown', (event) => {
     if (initialHeight + initialTop - event.clientY + rotatePointDeviation > 100) {
       svg.style.height = (initialHeight + initialTop - event.clientY + rotatePointDeviation) + 'px'
       svg.style.top = (event.clientY - rotatePointDeviation) + 'px'
+      basePosition = (initialHeight + initialTop - event.clientY + rotatePointDeviation) / (initialHeight / initialBasePosition)
     }
     if (initialWidth + initialLeft - event.clientX > 100) {
       svg.style.width = (initialWidth + initialLeft - event.clientX) + 'px'
       svg.style.left = (event.clientX - rectSize / 2) + 'px'
     }
-    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    if (svg.getBoundingClientRect().width - 15 <= headPosition) {
-      headPosition = svg.getBoundingClientRect().width - 15
+    if (svg.getBoundingClientRect().width - 30 <= headPosition) {
+      headPosition = svg.getBoundingClientRect().width - 30
     }
     arrowHeadPoint.setAttribute("cx", headPosition)
     figureResize()
@@ -325,6 +328,7 @@ topLeftRect.addEventListener('mousedown', (event) => {
 
 //function for resizing using the top right point
 topRightRect.addEventListener('mousedown', (event) => {
+  let initialBasePosition = basePosition
   let initialHeight = svgHeight
   let initialTop = svg.getBoundingClientRect().top
   let onMouseMove = (event) => {
@@ -332,14 +336,14 @@ topRightRect.addEventListener('mousedown', (event) => {
     if (initialHeight + initialTop - event.clientY + rotatePointDeviation > 100) {
       svg.style.height = (initialHeight + initialTop - event.clientY + rotatePointDeviation) + 'px'
       svg.style.top = (event.clientY - rotatePointDeviation) + 'px'
+      basePosition = (initialHeight + initialTop - event.clientY + rotatePointDeviation) / (initialHeight / initialBasePosition)
     }
     if (event.clientX - svg.getBoundingClientRect().left > 100) {
       svg.style.width = (event.clientX - svg.getBoundingClientRect().left + rectSize / 2) + 'px'
     }
-    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    if (svg.getBoundingClientRect().width - 15 <= headPosition) {
-      headPosition = svg.getBoundingClientRect().width - 15
+    if (svg.getBoundingClientRect().width - 30 <= headPosition) {
+      headPosition = svg.getBoundingClientRect().width - 30
     }
     arrowHeadPoint.setAttribute("cx", headPosition)
     figureResize()
@@ -356,18 +360,20 @@ topRightRect.addEventListener('mousedown', (event) => {
 
 //function for resizing using the bottom right point
 bottomRightRect.addEventListener('mousedown', (event) => {
+  let initialBasePosition = basePosition
+  let initialHeight = svgHeight
   let onMouseMove = (event) => {
     document.documentElement.style.cursor = "nwse-resize"
     if (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation > 100) {
       svg.style.height = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) + 'px'
+      basePosition = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) / (initialHeight / initialBasePosition)
     }
     if (event.clientX - svg.getBoundingClientRect().left > 100) {
       svg.style.width = (event.clientX - svg.getBoundingClientRect().left + rectSize / 2) + 'px'
     }
-    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    if (svg.getBoundingClientRect().width - 15 <= headPosition) {
-      headPosition = svg.getBoundingClientRect().width - 15
+    if (svg.getBoundingClientRect().width - 30 <= headPosition) {
+      headPosition = svg.getBoundingClientRect().width - 30
     }
     arrowHeadPoint.setAttribute("cx", headPosition)
     figureResize()
@@ -384,21 +390,23 @@ bottomRightRect.addEventListener('mousedown', (event) => {
 
 //function for resizing using the bottom left point
 bottomLeftRect.addEventListener('mousedown', (event) => {
+  let initialBasePosition = basePosition
+  let initialHeight = svgHeight
   let initialWidth = svgWidth
   let initialLeft = svg.getBoundingClientRect().left
   let onMouseMove = (event) => {
     document.documentElement.style.cursor = "nesw-resize"
+    if (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation > 100) {
+      svg.style.height = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) + 'px'
+      basePosition = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) / (initialHeight / initialBasePosition)
+    }
     if (initialWidth + initialLeft - event.clientX > 100) {
       svg.style.width = (initialWidth + initialLeft - event.clientX - rectSize / 2) + 'px'
       svg.style.left = (event.clientX) + 'px'
     }
-    if (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation > 100) {
-      svg.style.height = (event.clientY - svg.getBoundingClientRect().top - rotatePointDeviation) + 'px'
-    }
-    basePosition = svgHeight * 0.4
     arrowBasePoint.setAttribute("cy", basePosition)
-    if (svg.getBoundingClientRect().width - 15 <= headPosition) {
-      headPosition = svg.getBoundingClientRect().width - 15
+    if (svg.getBoundingClientRect().width - 30 <= headPosition) {
+      headPosition = svg.getBoundingClientRect().width - 30
     }
     arrowHeadPoint.setAttribute("cx", headPosition)
     figureResize()
